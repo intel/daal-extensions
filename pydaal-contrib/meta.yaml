@@ -1,0 +1,44 @@
+{% set version = "2017.0" %}
+{% set buildnumber = 0 %}
+
+package:
+  name: pydaalcontrib
+  version: {{version}}
+
+source:
+  path: .
+
+build:
+  script: $PYTHON setup.py install --single-version-externally-managed --record=/tmp/record.txt # [unix]
+  script: %PYTHON% setup.py install --single-version-externally-managed --record=C:\\temp\record.txt # [win]
+  number: {{buildnumber}}
+
+requirements:
+  build:
+    - python
+    - numpy >=1.13
+    - pydaal >=2018.0
+    - jsonpickle >=0.9.3
+    - multipledispatch
+    - future
+  run:
+    - python
+    - numpy >=1.13
+    - pydaal >=2018.0
+    - jsonpickle >=0.9.3
+    - multipledispatch
+    - future
+
+test:
+  source_files:
+    - pydaalcontrib/tests
+
+about:
+  home: https://github.com/01org/daal-extensions/pydaal-contrib
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: Intel DAAL contrib and extensions library
+  description: |
+    Provides reusable and easily understood Intel DAAL API for Data Science and Machine Learning communities.
+  doc_url: https://github.com/01org/daal-extensions/docs
+  dev_url: https://github.com/01org/daal-extensions/pydaal-contrib

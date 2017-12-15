@@ -1,0 +1,36 @@
+{% set version = "2017.0" %}
+{% set buildnumber = 0 %}
+
+package:
+  name: pydaaltensorflow
+  version: {{version}}
+
+source:
+  path: .
+
+build:
+  script: $PYTHON setup.py install --single-version-externally-managed --record=/tmp/record.txt # [unix]
+  script: %PYTHON% setup.py install --single-version-externally-managed --record=C:\\temp\record.txt # [win]
+  number: {{buildnumber}}
+
+requirements:
+  build:
+    - python
+    - tensorflow
+    - pydaalcontrib
+  run:
+    - python
+    - tensorflow
+    - pydaalcontrib
+
+test:
+  source_files:
+    - pydaaltensorflow/tests
+
+about:
+  home: https://github.com/01org/daal-extensions/pydaal-tensorflow
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: Converter from Tensorflow models to Intel DAAL
+  doc_url: https://github.com/01org/daal-extensions/docs
+  dev_url: https://github.com/01org/daal-extensions/pydaal-tensorflow

@@ -1,0 +1,38 @@
+{% set version = "2017.0" %}
+{% set buildnumber = 0 %}
+
+package:
+  name: pydaalcaffe
+  version: {{version}}
+
+source:
+  path: .
+
+build:
+  script: $PYTHON setup.py install --single-version-externally-managed --record=/tmp/record.txt # [unix]
+  script: %PYTHON% setup.py install --single-version-externally-managed --record=C:\\temp\record.txt # [win]
+  number: {{buildnumber}}
+
+requirements:
+  build:
+    - python
+    - protobuf
+    - pydaalcontrib
+  run:
+    - python
+    - protobuf
+    - pydaalcontrib
+
+test:
+  source_files:
+    - pydaalcaffe/tests
+    - pydaalcaffe/proto
+    - pydaalcaffe/data
+
+about:
+  home: https://github.com/01org/daal-extensions/pydaal-caffe
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: Converter from Caffe models to Intel DAAL
+  doc_url: https://github.com/01org/daal-extensions/docs
+  dev_url: https://github.com/01org/daal-extensions/pydaal-caffe
